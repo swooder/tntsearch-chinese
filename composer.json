@@ -1,5 +1,5 @@
 {
-    "name": "teamtnt/tntsearch",
+    "name": "woodfish/tntsearch-chinese",
     "type": "library",
     "description": "A fully featured full text search engine written in PHP",
     "keywords": [
@@ -9,10 +9,8 @@
     "license": "MIT",
     "authors": [
         {
-            "name": "Nenad Tičarić",
-            "email": "nticaric@gmail.com",
-            "homepage": "http://www.tntstudio.us",
-            "role": "Developer"
+            "name": "woodfish",
+            "email": "shaojie519@gmail.com"
         }
     ],
     "require": {
