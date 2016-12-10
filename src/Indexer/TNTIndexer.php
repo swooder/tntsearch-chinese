@@ -11,8 +11,8 @@ use TeamTNT\TNTSearch\Connectors\MySqlConnector;
 use TeamTNT\TNTSearch\Connectors\PostgresConnector;
 use TeamTNT\TNTSearch\Connectors\SQLiteConnector;
 use TeamTNT\TNTSearch\FileReaders\TextFileReader;
+use TeamTNT\TNTSearch\Stemmer\ChineseStemmer;
 use TeamTNT\TNTSearch\Stemmer\CroatianStemmer;
-use TeamTNT\TNTSearch\Stemmer\PorterStemmer;
 use TeamTNT\TNTSearch\Support\Collection;
 use TeamTNT\TNTSearch\Support\Tokenizer;
 use TeamTNT\TNTSearch\Support\TokenizerInterface;
@@ -37,7 +37,7 @@ class TNTIndexer
 
     public function __construct()
     {
-        $this->stemmer    = new PorterStemmer;
+        $this->stemmer    = new ChineseStemmer();
         $this->tokenizer  = new Tokenizer;
         $this->filereader = new TextFileReader;
     }
@@ -85,6 +85,10 @@ class TNTIndexer
         $this->stemmer = $stemmer;
         $class         = get_class($stemmer);
         $this->index->exec("INSERT INTO info ( 'key', 'value') values ( 'stemmer', '$class')");
+    }
+
+    public function setChineseStemmer() {
+        $this->setStemmer(new ChineseStemmer);
     }
 
     public function setCroatianStemmer()
@@ -327,7 +331,8 @@ class TNTIndexer
         $words   = $this->breakIntoTokens($text);
         $stems   = [];
         foreach ($words as $word) {
-            $stems[] = $stemmer->stem($word);
+            $stem = $stemmer->stem($word);
+            $stems = array_merge($stems, $stem);
         }
         return $stems;
     }

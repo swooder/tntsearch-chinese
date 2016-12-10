@@ -19,7 +19,8 @@
         "php" : "~5.5|~7.0",
         "ext-pdo_sqlite": "*",
         "ext-sqlite3": "*",
-        "ext-mbstring": "*"
+        "ext-mbstring": "*",
+        "woodfish/chinesestemmer": "1.0.0"
     },
     "require-dev": {
         "phpunit/phpunit" : "5.*"
