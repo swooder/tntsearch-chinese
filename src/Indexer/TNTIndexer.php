@@ -332,7 +332,9 @@ class TNTIndexer
         $stems   = [];
         foreach ($words as $word) {
             $stem = $stemmer->stem($word);
-            $stems = array_merge($stems, $stem);
+            if (is_array($stem)) {
+                $stems = array_merge($stems, $stem);
+            }
         }
         return $stems;
     }
